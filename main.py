@@ -40,7 +40,7 @@ def get_findings():
     # convert to eppoch millisec 
     # filter = "event_time > {start} AND event_time<{end}".format(end=round(end_time.timestamp()), start=round(start_time.timestamp()))
     # epoch in ms
-    filter = "event_time > {start}".format(start=round(start_time.timestamp()*1000))
+    filter = 'event_time > {start} AND state="ACTIVE"'.format(start=round(start_time.timestamp()*1000))
     print(filter)
     finding_result_iterator = scc_client.list_findings(
         request={"parent": source_name, "filter": filter}
