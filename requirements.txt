@@ -1,0 +1,4 @@
+# Function dependencies
+google-api-core
+google-cloud-securitycenter
+google-cloud-storage

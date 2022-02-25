@@ -1,0 +1,1 @@
+### Demo script for exporting scc findings to gcs bucket
