@@ -52,8 +52,8 @@ def get_findings():
         # json_dict = MessageToDict(finding_result._pb ,preserving_proto_field_name=True)
         #print(json_dict["finding"]["event_time"])
         # print(json_str)
-        results = ",".join(result_list)
-        return "["+results+"]"
+    results = ",".join(result_list)
+    return "["+results+"]"
 
 
 def start(request):
