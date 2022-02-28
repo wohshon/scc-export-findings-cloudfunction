@@ -5,11 +5,17 @@ from google.protobuf import field_mask_pb2
 from google.protobuf.json_format import MessageToJson
 from google.protobuf.json_format import MessageToDict
 import datetime
+import urllib.request
 from google.cloud import storage
 
 # Env variables
-organization_id = os.environ['ORG_ID'] 
-project_id = os.environ['PROJECT_ID'] 
+# organization_id = os.environ['ORG_ID'] 
+# project_id = os.environ['PROJECT_ID'] 
+url = "http://metadata.google.internal/computeMetadata/v1/project/project-id"
+req = urllib.request.Request(url)
+req.add_header("Metadata-Flavor", "Google")
+project_id = urllib.request.urlopen(req).read().decode()
+print('Project Id from metadata server: {}'.format(project_id))
 time_window = os.environ['TIME_WINDOW_MINUTES']
 #bucket name without the prefixes
 bucket_name = os.environ['BUCKET']
@@ -17,7 +23,7 @@ bucket_name = os.environ['BUCKET']
 # Create a client.
 scc_client = securitycenter.SecurityCenterClient()
 storage_client = storage.Client()
-org_name = "organizations/{org_id}".format(org_id=organization_id)
+# org_name = "organizations/{org_id}".format(org_id=organization_id)
 result_list = []
 
 def save_findings(contents, destination_blob_name):
